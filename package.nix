@@ -2,7 +2,7 @@
   lib,
   stdenv,
   callPackage,
-  fetchurl,
+  fetchurl',
   auto-patchelf,
   autoPatchelfHook,
   makeWrapper,
@@ -25,7 +25,7 @@
   overrideSource ? null,
 }:
 let
-  sources = callPackage ./sources.nix { };
+  sources = callPackage ./sources.nix { inherit fetchurl'; };
   platformSources = sources.editions.${binaryNinjaEdition};
   source =
     if overrideSource != null then
@@ -34,7 +34,7 @@ let
       platformSources.${stdenv.hostPlatform.system}
     else
       throw "No source for system ${stdenv.hostPlatform.system}";
-  desktopIcon = fetchurl {
+  desktopIcon = fetchurl' {
     url = "https://docs.binary.ninja/img/logo.png";
     hash = "sha256-TzGAAefTknnOBj70IHe64D6VwRKqIDpL4+o9kTw0Mn4=";
   };

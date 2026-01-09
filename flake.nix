@@ -17,10 +17,13 @@
         pkgs:
         let
           lib = pkgs.lib;
-          sources = import ./sources.nix pkgs;
+          sources = import ./sources.nix (pkgs // { fetchurl' = pkgs.fetchurl; });
           editions = lib.mapAttrs' (binaryNinjaEdition: value: {
             name = "binary-ninja-${binaryNinjaEdition}";
-            value = pkgs.callPackage ./package.nix { inherit binaryNinjaEdition; };
+            value = pkgs.callPackage ./package.nix {
+              inherit binaryNinjaEdition;
+              fetchurl' = pkgs.fetchurl;
+            };
           }) sources.editions;
           editionsWayland = lib.mapAttrs' (name: value: {
             name = "${name}-wayland";
@@ -33,7 +36,7 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        sources = pkgs.callPackage ./sources.nix { };
+        sources = pkgs.callPackage ./sources.nix { fetchurl' = pkgs.fetchurl; };
         packages = mkPackages pkgs;
       in
       {
