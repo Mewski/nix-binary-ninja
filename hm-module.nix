@@ -1,4 +1,3 @@
-{ self, ... }:
 { config, lib, ... }:
 let
   cfg = config.programs.binary-ninja;
@@ -9,7 +8,6 @@ in
   ];
 
   config = lib.mkIf cfg.enable {
-    nixpkgs.overlays = [ self.overlays.default ];
     home.packages = [ cfg.package ];
   };
 }
