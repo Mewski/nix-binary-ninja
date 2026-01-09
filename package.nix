@@ -70,6 +70,7 @@ stdenv.mkDerivation {
   ];
   pythonDeps = [ python3.pkgs.pip ];
   appendRunpaths = [ "${lib.getLib python3}/lib" ];
+  autoPatchelfIgnoreMissingDeps = [ "libQt6WaylandEglClientHwIntegration.so.6" ];
   qtWrapperArgs = lib.optionals forceWayland [
     "--set"
     "QT_QPA_PLATFORM"
