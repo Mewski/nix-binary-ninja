@@ -1,3 +1,4 @@
+{ ... }:
 { config, lib, ... }:
 let
   cfg = config.programs.binary-ninja;
