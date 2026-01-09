@@ -1,7 +1,7 @@
 {
   lib,
   requireFile,
-  fetchurl',
+  fetchurl,
   ...
 }:
 let
@@ -15,7 +15,7 @@ let
   ];
   mkFreeSource =
     name:
-    fetchurl' {
+    fetchurl {
       url = "https://cdn.binary.ninja/installers/${name}";
       sha256 = data.hashes.${name};
     };
