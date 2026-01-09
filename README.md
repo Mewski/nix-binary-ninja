@@ -11,7 +11,7 @@ Additionally, more variants (e.g. an FHS variant) might be desirable.
 You can run Binary Ninja directly from this flake:
 
 ```console
-nix run github:jchv/nix-binary-ninja
+nix run github:Mewski/nix-binary-ninja
 ```
 
 > [!IMPORTANT]
@@ -21,7 +21,7 @@ nix run github:jchv/nix-binary-ninja
 If you want to run a specific edition, you can select an attribute like so:
 
 ```console
-nix run github:jchv/nix-binary-ninja#binary-ninja-free-wayland
+nix run github:Mewski/nix-binary-ninja#binary-ninja-free-wayland
 ```
 
 For a list of available package attributes, see the [Packages section](#Packages).
@@ -39,7 +39,7 @@ To include Binary Ninja in your NixOS system using this flake, follow these step
 
         # This is what you will want to add.
         binaryninja = {
-          url = "github:jchv/nix-binary-ninja";
+          url = "github:Mewski/nix-binary-ninja";
 
           # Optional, but recommended.
           inputs.nixpkgs.follows = "nixpkgs";
