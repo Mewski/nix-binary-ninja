@@ -120,6 +120,50 @@ To include Binary Ninja in your NixOS system using this flake, follow these step
     }
     ```
 
+### Home Manager module
+
+A Home Manager module is also available at `hmModules.binaryninja`. This assumes you have already added the flake to your inputs as shown in the [NixOS module section](#nixos-module).
+
+> [!IMPORTANT]
+> If you use `home-manager.useGlobalPkgs = true`, you must add the Binary Ninja overlay to your nixpkgs configuration manually, as the home-manager module does not set `nixpkgs.overlays` to avoid conflicts.
+
+ 1. **Add the overlay to your nixpkgs configuration:**
+
+    ```nix
+    {
+      nixpkgs.overlays = [ binaryninja.overlays.default ];
+    }
+    ```
+
+ 2. **Import the home-manager module:**
+
+    ```nix
+    {
+      imports = [ binaryninja.hmModules.binaryninja ];
+    }
+    ```
+
+ 3. **Enable Binary Ninja in your home-manager configuration:**
+
+    ```nix
+    {
+      programs.binary-ninja.enable = true;
+    }
+    ```
+
+    If you want to use a specific version, you can select this using `programs.binary-ninja.package`:
+
+    ```nix
+    { pkgs, ... }: {
+      programs.binary-ninja = {
+        enable = true;
+        package = pkgs.binary-ninja-free-wayland;
+      };
+    }
+    ```
+
+    For a list of available package attributes, see the [Packages section](#Packages).
+
 ## Packages
 The following package attributes are available:
 
